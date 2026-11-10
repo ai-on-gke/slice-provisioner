@@ -1,0 +1,51 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+metrics:
+  - name: slice_provisioner_reconciliation_errors_total
+    description: Total number of slice provisioner reconciliation errors.
+    type: Counter
+    units: count
+    labels:
+      - name: error_type
+        description: The operation that failed during reconciliation.
+        examples:
+          - GetStatefulSetError
+          - DeleteSliceError
+          - RemoveFinalizerError
+          - AddFinalizerError
+          - GetSliceError
+          - GetPriorityClassError
+          - CreateSliceError
+
+  - name: slice_provisioner_slice_operations_total
+    description: Total number of slice operations (creation/deletion) attempted by the provisioner.
+    type: Counter
+    units: count
+    labels:
+      - name: operation
+        description: The operation performed.
+        examples:
+          - Create
+          - Delete
+      - name: status
+        description: The result of the operation.
+        examples:
+          - Success
+          - Error
+
+  - name: slice_provisioner_slice_creation_processing_milliseconds
+    description: Time taken to process a StatefulSet and create a Slice in milliseconds (measured from the workload creation timestamp to successful slice creation).
+    type: Histogram
+    units: milliseconds
